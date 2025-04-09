@@ -1,0 +1,1902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ResOnIT Infotech - Technology Training & Internship</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+          --primary: #4361ee;
+          --secondary: #3a0ca3;
+          --accent: #f72585;
+          --dark: #1f1f1f;
+          --light: #f8f9fa;
+          --white: #ffffff;
+          --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+          --hover-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+          --gradient: linear-gradient(135deg, #4361ee, #3a0ca3);
+          --accent-gradient: linear-gradient(135deg, #f72585, #b5179e);
+        }
+
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+          background-color: var(--light);
+          color: var(--dark);
+          line-height: 1.7;
+          overflow-x: hidden;
+        }
+
+        .container {
+          width: 100%;
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 20px;
+          position: relative;
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+          width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+          background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+          background: var(--primary);
+          border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+          background: var(--secondary);
+        }
+
+        /* Header Styles */
+        header {
+          background-color: rgba(255, 255, 255, 0.97);
+          box-shadow: var(--shadow);
+          position: fixed;
+          width: 100%;
+          top: 0;
+          z-index: 1000;
+          backdrop-filter: blur(5px);
+        }
+
+        .navbar {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 15px 0;
+        }
+
+        .logo {
+          font-size: 28px;
+          font-weight: 800;
+          color: var(--primary);
+          text-decoration: none;
+          display: flex;
+          align-items: center;
+          letter-spacing: -0.5px;
+        }
+
+        .logo span {
+          color: var(--accent);
+          font-weight: 900;
+        }
+
+        .logo::before {
+          content: "✦";
+          margin-right: 8px;
+          color: var(--accent);
+          font-size: 20px;
+        }
+
+        .nav-links {
+          display: flex;
+          list-style: none;
+          margin-left: auto;
+        }
+
+        .nav-links li {
+          margin-left: 35px;
+          position: relative;
+        }
+
+        .nav-links a {
+          text-decoration: none;
+          color: var(--dark);
+          font-weight: 600;
+          font-size: 16px;
+          transition: all 0.3s;
+          padding: 8px 0;
+          position: relative;
+        }
+
+        .nav-links a::after {
+          content: '';
+          position: absolute;
+          width: 0;
+          height: 2.5px;
+          bottom: 0;
+          left: 0;
+          background: var(--accent-gradient);
+          transition: width 0.3s ease;
+          border-radius: 10px;
+        }
+
+        .nav-links a:hover {
+          color: var(--accent);
+        }
+
+        .nav-links a:hover::after {
+          width: 100%;
+        }
+
+        /* Mobile Menu Button */
+        .menu-toggle {
+          display: none;
+          flex-direction: column;
+          cursor: pointer;
+          padding: 5px;
+          z-index: 1001;
+        }
+
+        .menu-toggle span {
+          height: 3px;
+          width: 30px;
+          background-color: var(--dark);
+          margin: 3px 0;
+          border-radius: 3px;
+          transition: all 0.3s ease;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+          transform: rotate(45deg) translate(5px, 5px);
+          background-color: var(--accent);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+          opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+          transform: rotate(-45deg) translate(7px, -7px);
+          background-color: var(--accent);
+        }
+
+        /* Dropdown Styles */
+        .dropdown {
+          position: relative;
+          cursor: pointer;
+        }
+
+        .dropdown-content {
+          display: none;
+          position: absolute;
+          background-color: white;
+          min-width: 280px;
+          box-shadow: var(--shadow);
+          border-radius: 12px;
+          padding: 10px 0;
+          z-index: 1;
+          top: 100%;
+          left: 50%;
+          transform: translateX(-50%);
+          margin-top: 15px;
+          overflow: hidden;
+          opacity: 0;
+          transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .dropdown-content::before {
+          content: '';
+          position: absolute;
+          top: -8px;
+          left: 50%;
+          transform: translateX(-50%);
+          border-width: 0 8px 8px;
+          border-style: solid;
+          border-color: transparent transparent #fff;
+        }
+
+        .dropdown:hover .dropdown-content {
+          display: block;
+          opacity: 1;
+          transform: translateX(-50%) translateY(0);
+        }
+
+        .dropdown-content a {
+          color: var(--dark);
+          padding: 14px 20px;
+          text-decoration: none;
+          display: block;
+          transition: all 0.3s;
+          position: relative;
+          border-left: 3px solid transparent;
+        }
+
+        .dropdown-content a:hover {
+          background-color: rgba(67, 97, 238, 0.05);
+          border-left: 3px solid var(--primary);
+        }
+
+        .dropdown-content .course-title {
+          font-weight: 700;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .dropdown-content .course-price {
+          color: var(--accent);
+          font-weight: 700;
+          background: rgba(247, 37, 133, 0.08);
+          padding: 4px 10px;
+          border-radius: 20px;
+          font-size: 14px;
+        }
+
+        .dropdown-content .course-hours {
+          color: #666;
+          font-size: 14px;
+          margin-top: 5px;
+          padding-left: 2px;
+        }
+
+        /* Hero Section */
+        .hero {
+          background: var(--gradient);
+          padding: 170px 0 120px;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .hero::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-image: url('/api/placeholder/1920/1080');
+          background-size: cover;
+          background-position: center;
+          opacity: 0.1;
+        }
+
+        .hero-content {
+          display: flex;
+          align-items: center;
+          position: relative;
+          z-index: 2;
+        }
+
+        .hero-text {
+          flex: 1;
+          padding-right: 50px;
+        }
+
+        .hero h1 {
+          font-size: 3.5rem;
+          font-weight: 800;
+          margin-bottom: 25px;
+          color: white;
+          line-height: 1.2;
+          position: relative;
+        }
+
+        .hero h1 span {
+          position: relative;
+          color: var(--accent);
+          z-index: 1;
+        }
+
+        .hero h1 span::after {
+          content: "";
+          position: absolute;
+          width: 100%;
+          height: 12px;
+          background-color: rgba(247, 37, 133, 0.2);
+          bottom: 5px;
+          left: 0;
+          z-index: -1;
+          border-radius: 10px;
+        }
+
+        .hero p {
+          font-size: 1.2rem;
+          color: rgba(255, 255, 255, 0.9);
+          margin-bottom: 40px;
+          max-width: 600px;
+        }
+
+        .hero-image {
+          flex: 0.8;
+          position: relative;
+        }
+
+        .hero-image img {
+          width: 100%;
+          border-radius: 12px;
+          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+          transform: perspective(1000px) rotateY(-15deg);
+          transition: all 0.5s;
+        }
+
+        .hero-image:hover img {
+          transform: perspective(1000px) rotateY(-5deg);
+        }
+
+        .btn {
+          display: inline-block;
+          background: var(--accent-gradient);
+          color: white;
+          padding: 15px 35px;
+          border-radius: 30px;
+          text-decoration: none;
+          font-weight: 700;
+          transition: all 0.3s;
+          box-shadow: 0 10px 20px rgba(247, 37, 133, 0.3);
+          position: relative;
+          overflow: hidden;
+          z-index: 1;
+        }
+
+        .btn::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+          transition: left 0.7s;
+          z-index: -1;
+        }
+
+        .btn:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 15px 25px rgba(247, 37, 133, 0.4);
+        }
+
+        .btn:hover::before {
+          left: 100%;
+        }
+
+        /* Stats Section */
+        .stats {
+          padding: 30px 0;
+          background-color: white;
+          margin-top: -60px;
+          border-radius: 20px 20px 0 0;
+          position: relative;
+          z-index: 10;
+        }
+
+        .stats-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 30px;
+        }
+
+        .stat-item {
+          text-align: center;
+          padding: 20px;
+        }
+
+        .stat-number {
+          font-size: 2.5rem;
+          font-weight: 800;
+          color: var(--primary);
+          margin-bottom: 10px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .stat-number i {
+          font-size: 1.8rem;
+          margin-right: 10px;
+          color: var(--accent);
+        }
+
+        .stat-text {
+          font-size: 1rem;
+          color: #666;
+          font-weight: 500;
+        }
+
+        /* Features Section */
+        .features {
+          padding: 100px 0;
+          background-color: white;
+          position: relative;
+        }
+
+        .features::before {
+          content: "";
+          position: absolute;
+          width: 200px;
+          height: 200px;
+          background: rgba(67, 97, 238, 0.05);
+          border-radius: 50%;
+          top: 50px;
+          left: -100px;
+          z-index: 0;
+        }
+
+        .features::after {
+          content: "";
+          position: absolute;
+          width: 300px;
+          height: 300px;
+          background: rgba(247, 37, 133, 0.05);
+          border-radius: 50%;
+          bottom: 50px;
+          right: -150px;
+          z-index: 0;
+        }
+
+        .section-title {
+          text-align: center;
+          margin-bottom: 70px;
+          position: relative;
+          z-index: 2;
+        }
+
+        .section-subtitle {
+          font-size: 1rem;
+          color: var(--accent);
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 3px;
+          margin-bottom: 15px;
+        }
+
+        .section-title h2 {
+          font-size: 2.5rem;
+          color: var(--dark);
+          position: relative;
+          display: inline-block;
+          margin-bottom: 20px;
+          font-weight: 800;
+        }
+
+        .section-title h2::after {
+          content: '';
+          position: absolute;
+          width: 80px;
+          height: 4px;
+          background: var(--accent-gradient);
+          bottom: -15px;
+          left: 50%;
+          transform: translateX(-50%);
+          border-radius: 5px;
+        }
+
+        .section-description {
+          max-width: 700px;
+          margin: 0 auto;
+          color: #666;
+          font-size: 1.1rem;
+        }
+
+        .features-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: 40px;
+          position: relative;
+          z-index: 2;
+        }
+
+        .feature-card {
+          background-color: white;
+          border-radius: 20px;
+          box-shadow: var(--shadow);
+          padding: 40px 30px;
+          text-align: center;
+          transition: all 0.4s;
+          position: relative;
+          overflow: hidden;
+          border: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .feature-card::before {
+          content: "";
+          position: absolute;
+          width: 100%;
+          height: 5px;
+          background: var(--accent-gradient);
+          top: 0;
+          left: 0;
+          transform: scaleX(0);
+          transform-origin: left;
+          transition: transform 0.4s ease;
+        }
+
+        .feature-card:hover {
+          transform: translateY(-15px);
+          box-shadow: var(--hover-shadow);
+        }
+
+        .feature-card:hover::before {
+          transform: scaleX(1);
+        }
+
+        .feature-icon {
+          margin-bottom: 25px;
+          font-size: 3rem;
+          width: 80px;
+          height: 80px;
+          line-height: 80px;
+          background: rgba(67, 97, 238, 0.1);
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 20px;
+          color: var(--primary);
+          transition: all 0.4s;
+        }
+
+        .feature-card:hover .feature-icon {
+          background: var(--primary);
+          color: white;
+          transform: rotateY(360deg);
+        }
+
+        .feature-card h3 {
+          margin-bottom: 15px;
+          font-size: 1.4rem;
+          font-weight: 700;
+          color: var(--dark);
+        }
+
+        .feature-card p {
+          color: #666;
+          line-height: 1.7;
+        }
+
+        /* About Section */
+        .about {
+          padding: 120px 0;
+          background-color: #f8f9fa;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .about::before {
+          content: "";
+          position: absolute;
+          width: 600px;
+          height: 600px;
+          background: radial-gradient(circle, rgba(67, 97, 238, 0.03) 0%, rgba(67, 97, 238, 0) 70%);
+          border-radius: 50%;
+          top: -300px;
+          left: -300px;
+        }
+
+        .about-content {
+          display: flex;
+          align-items: center;
+          gap: 60px;
+          position: relative;
+        }
+
+        .about-text {
+          flex: 1;
+        }
+
+        .about-text h2 {
+          font-size: 2.5rem;
+          margin-bottom: 25px;
+          font-weight: 800;
+          color: var(--dark);
+          position: relative;
+          display: inline-block;
+        }
+
+        .about-text h2::after {
+          content: '';
+          position: absolute;
+          width: 60px;
+          height: 4px;
+          background: var(--accent-gradient);
+          bottom: -12px;
+          left: 0;
+          border-radius: 5px;
+        }
+
+        .about-text p {
+          margin-bottom: 25px;
+          color: #555;
+          font-size: 1.05rem;
+        }
+
+        .about-text h3 {
+          font-size: 1.5rem;
+          color: var(--primary);
+          margin-bottom: 15px;
+          margin-top: 30px;
+          font-weight: 700;
+        }
+
+        .about-image {
+          flex: 1;
+          position: relative;
+          border-radius: 20px;
+          overflow: hidden;
+          box-shadow: var(--shadow);
+        }
+
+        .about-image img {
+          width: 100%;
+          height: auto;
+          display: block;
+          transition: transform 0.5s;
+        }
+
+        .about-image::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(rgba(0,0,0,0), rgba(67, 97, 238, 0.1));
+          z-index: 1;
+        }
+
+        .about-image:hover img {
+          transform: scale(1.05);
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+          padding: 120px 0;
+          background-color: white;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .testimonials::before {
+          content: "";
+          position: absolute;
+          width: 400px;
+          height: 400px;
+          background: radial-gradient(circle, rgba(247, 37, 133, 0.03) 0%, rgba(247, 37, 133, 0) 70%);
+          border-radius: 50%;
+          bottom: -200px;
+          right: -200px;
+        }
+
+        .testimonial-cards {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 40px;
+          margin-top: 30px;
+        }
+
+        .testimonial-card {
+          background: white;
+          border-radius: 20px;
+          padding: 30px;
+          box-shadow: var(--shadow);
+          transition: all 0.3s;
+          border: 1px solid rgba(0,0,0,0.03);
+          position: relative;
+        }
+
+        .testimonial-card:hover {
+          transform: translateY(-10px);
+          box-shadow: var(--hover-shadow);
+        }
+
+        .testimonial-quote {
+          font-size: 2rem;
+          color: var(--primary);
+          position: absolute;
+          top: 15px;
+          right: 20px;
+          opacity: 0.2;
+        }
+
+        .testimonial-text {
+          font-style: italic;
+          margin-bottom: 25px;
+          color: #555;
+          line-height: 1.8;
+        }
+
+        .testimonial-author {
+          display: flex;
+          align-items: center;
+        }
+
+        .testimonial-avatar {
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+          overflow: hidden;
+          margin-right: 15px;
+          border: 3px solid var(--primary);
+        }
+
+        .testimonial-name {
+          font-weight: 700;
+          color: var(--dark);
+          font-size: 1.1rem;
+          margin-bottom: 5px;
+        }
+
+        .testimonial-position {
+          color: var(--accent);
+          font-size: 0.9rem;
+          font-weight: 600;
+        }
+
+        /* CTA Section */
+        .cta {
+          padding: 80px 0;
+          background: var(--gradient);
+          color: white;
+          text-align: center;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .cta::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-image: url('/api/placeholder/1920/1080');
+          background-size: cover;
+          opacity: 0.05;
+        }
+
+        .cta-content {
+          position: relative;
+          z-index: 2;
+          max-width: 800px;
+          margin: 0 auto;
+        }
+
+        .cta h2 {
+          font-size: 2.5rem;
+          font-weight: 800;
+          margin-bottom: 25px;
+        }
+
+        .cta p {
+          font-size: 1.2rem;
+          margin-bottom: 40px;
+          color: rgba(255, 255, 255, 0.9);
+        }
+
+        .cta-btn {
+          background: white;
+          color: var(--primary);
+          padding: 15px 40px;
+          border-radius: 30px;
+          text-decoration: none;
+          font-weight: 700;
+          transition: all 0.3s;
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+          display: inline-block;
+        }
+
+        .cta-btn:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Footer */
+        footer {
+          background-color: var(--dark);
+          color: white;
+          padding: 80px 0 20px;
+          position: relative;
+        }
+
+        .footer-wave {
+          position: absolute;
+          top: -80px;
+          left: 0;
+          width: 100%;
+          height: 80px;
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%231f1f1f' fill-opacity='1' d='M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,197.3C672,192,768,160,864,165.3C960,171,1056,213,1152,229.3C1248,245,1344,235,1392,229.3L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+          background-size: cover;
+          background-position: center;
+        }
+
+        .footer-content {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+          gap: 50px;
+          margin-bottom: 50px;
+        }
+
+        .footer-column h3 {
+          font-size: 1.3rem;
+          margin-bottom: 25px;
+          position: relative;
+          font-weight: 700;
+          padding-bottom: 15px;
+        }
+
+        .footer-column h3::after {
+          content: '';
+          position: absolute;
+          width: 50px;
+          height: 3px;
+          background-color: var(--accent);
+          bottom: 0;
+          left: 0;
+          border-radius: 3px;
+        }
+
+        .footer-column ul {
+          list-style: none;
+        }
+
+        .footer-column ul li {
+          margin-bottom: 15px;
+          display: flex;
+          align-items: center;
+        }
+
+        .footer-column ul li i {
+          margin-right: 10px;
+          color: var(--accent);
+          font-size: 0.9rem;
+        }
+
+        .footer-column a {
+          color: rgba(255, 255, 255, 0.7);
+          text-decoration: none;
+          transition: color 0.3s;
+          display: flex;
+          align-items: center;
+        }
+
+        .footer-column a:hover {
+          color: white;
+        }
+
+        .footer-column a i {
+          margin-right: 10px;
+          color: var(--primary);
+        }
+
+        .social-links {
+          display: flex;
+          gap: 15px;
+          margin-top: 20px;
+        }
+
+        .social-link {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.1);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          font-size: 1.2rem;
+          transition: all 0.3s;
+        }
+
+        .social-link:hover {
+          background: var(--primary);
+          transform: translateY(-5px);
+        }
+
+        .footer-bottom {
+          text-align: center;
+          padding-top: 30px;
+          border-top: 1px solid rgba(255, 255, 255, 0.1);
+          color: rgba(255, 255, 255, 0.5);
+        }
+
+        .newsletter-form {
+          position: relative;
+          margin-top: 20px;
+        }
+
+        .newsletter-input {
+          width: 100%;
+          padding: 15px 20px;
+          border-radius: 30px;
+          border: none;
+          outline: none;
+          background: rgba(255, 255, 255, 0.1);
+          color: white;
+          font-size: 1rem;
+        }
+
+        .newsletter-input::placeholder {
+          color: rgba(255, 255, 255, 0.5);
+        }
+
+        .newsletter-btn {
+          position: absolute;
+          right: 5px;
+          top: 5px;
+          background: var(--accent-gradient);
+          border: none;
+          height: calc(100% - 10px);
+          width: 50px;
+          border-radius: 50%;
+          color: white;
+          cursor: pointer;
+          transition: all 0.3s;
+        }
+
+        .newsletter-btn:hover {
+          transform: scale(1.1);
+        }
+
+        /* Back to top button */
+        .back-to-top {
+          position: fixed;
+          bottom: 30px;
+          right: 30px;
+          width: 50px;
+          height: 50px;
+          background: var(--accent-gradient);
+          color: white;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-decoration: none;
+          font-size: 1.2rem;
+          box-shadow: 0 5px 15px rgba(247, 37, 133, 0.3);
+          opacity: 0;
+          transition: all 0.3s;
+          transform: translateY(20px);
+          z-index: 99;
+        }
+
+        .back-to-top.active {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+          transform: translateY(-5px);
+        }
+
+        /* Animation Classes */
+        .fade-in {
+          animation: fadeIn 1s ease forwards;
+        }
+
+        .slide-up {
+          animation: slideUp 1s ease forwards;
+        }
+
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+          from {
+            opacity: 0;
+            transform: translateY(50px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1200px) {
+          .hero h1 {
+            font-size: 3rem;
+          }
+        }
+
+        @media (max-width: 992px) {
+          .hero-content {
+            flex-direction: column;
+          }
+
+          .hero-text {
+            padding-right: 0;
+            text-align: center;
+            margin-bottom: 40px;
+          }
+
+          .hero h1 {
+            font-size: 2.5rem;
+          }
+
+          .hero p {
+            margin: 0 auto 30px;
+          }
+
+          .stats-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+
+          .about-content {
+            flex-direction: column-reverse;
+          }
+
+          .about-text {
+            text-align: center;
+            margin-top: 40px;
+          }
+
+          .about-text h2::after {
+            left: 50%;
+            transform: translateX(-50%);
+          }
+        }
+
+        @media (max-width: 768px) {
+          .menu-toggle {
+            display: flex;
+          }
+
+          .nav-links {
+            display: none;
+            position: fixed;
+            flex-direction: column;
+            background-color: white;
+            width: 100%;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            padding: 80px 40px;
+            z-index: 100;
+            overflow-y: auto;
+            transition: all 0.3s ease;
+          }
+
+          .nav-links.active {
+            display:flex;
+        }
+
+          .nav-links li {
+            margin: 15px 0;
+            width: 100%;
+          }
+
+          .dropdown-content {
+            position: static;
+            box-shadow: none;
+            width: 100%;
+            display: none;
+            padding: 10px 0 10px 20px;
+            margin-top: 10px;
+            transform: none;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+          }
+
+          .dropdown-content::before {
+            display: none;
+          }
+
+          .dropdown-content a {
+            padding: 12px 15px;
+          }
+
+          .dropdown.active .dropdown-content {
+            display: block;
+          }
+
+          .hero {
+            padding: 130px 0 80px;
+          }
+
+          .hero h1 {
+            font-size: 2.2rem;
+          }
+
+          .hero p {
+            font-size: 1rem;
+          }
+
+          .features, .about, .testimonials {
+            padding: 70px 0;
+          }
+
+          .section-title h2 {
+            font-size: 2rem;
+          }
+
+          .cta h2 {
+            font-size: 2rem;
+          }
+        }
+
+        @media (max-width: 576px) {
+          .stats-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .hero {
+            padding: 120px 0 60px;
+          }
+
+          .hero h1 {
+            font-size: 1.8rem;
+          }
+
+          .features-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .testimonial-cards {
+            grid-template-columns: 1fr;
+          }
+
+          .footer-content {
+            grid-template-columns: 1fr;
+            gap: 40px;
+          }
+
+          .section-subtitle {
+            font-size: 0.9rem;
+          }
+
+          .section-title h2 {
+            font-size: 1.8rem;
+          }
+
+          .about-text h2 {
+            font-size: 1.8rem;
+          }
+
+          .feature-card {
+            padding: 30px 20px;
+          }
+
+          .back-to-top {
+            right: 20px;
+            bottom: 20px;
+            width: 40px;
+            height: 40px;
+            font-size: 1rem;
+          }
+        }
+        .course-section {
+                padding: 5rem 0;
+                background-color: var(--light-bg);
+                text-align: center;
+            }
+
+            .course-title {
+                font-size: 2.5rem;
+                margin-bottom: 3rem;
+                color: var(--primary);
+            }
+
+            .filter-buttons {
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                margin-bottom: 3rem;
+            }
+
+            .filter-btn {
+                padding: 0.7rem 1.5rem;
+                margin: 0.5rem;
+                background-color: var(--light);
+                border: none;
+                border-radius: 50px;
+                cursor: pointer;
+                font-weight: 600;
+                transition: all 0.3s ease;
+            }
+
+            .filter-btn.active {
+                background-color: var(--primary);
+                color: var(--light);
+            }
+
+            .courses-container {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 2rem;
+            }
+
+            .course-card {
+                background-color: var(--light);
+                border-radius: 10px;
+                overflow: hidden;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                transition: all 0.3s ease;
+                padding: 2rem;
+                text-align: left;
+                  position: relative;
+    padding-bottom: 80px;
+    height: 100%;
+            }
+
+            .badge {
+                background-color: var(--primary);
+                color: var(--light);
+                display: inline-block;
+                padding: 0.3rem 1rem;
+                border-radius: 50px;
+                font-size: 0.8rem;
+                margin-bottom: 1rem;
+            }
+
+            .course-name {
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+                color: var(--dark);
+            }
+
+            .course-details {
+                margin-bottom: 1.5rem;
+                list-style: none;
+            }
+
+            .course-details li {
+                position: relative;
+                padding-left: 1.5rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .course-details li:before {
+                content: "✓";
+                color: var(--primary);
+                position: absolute;
+                left: 0;
+            }
+
+            .course-duration {
+                font-size: 1rem;
+                color: #777;
+                margin-bottom: 1.5rem;
+            }
+
+            .live-project-tag {
+                display: inline-block;
+                background-color: #ff6b6b;
+                color: white;
+                padding: 0.3rem 0.8rem;
+                border-radius: 4px;
+                font-size: 0.8rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .course-price {
+                font-size: 1.8rem;
+                font-weight: bold;
+                color: var(--primary);
+                margin-bottom: 1.5rem;
+            }
+
+            .enroll-btn {
+                display: inline-block;
+                padding: 0.8rem 2rem;
+                background-color: var(--primary);
+                color: var(--light);
+                text-decoration: none;
+                border-radius: 50px;
+                transition: all 0.3s ease;
+                font-weight: bold;
+                text-transform: uppercase;
+                 position: absolute;
+        bottom: 30px;
+        left: 2rem;
+        right: 2rem;
+        width: calc(100% - 4rem)
+            }
+
+            .enroll-btn:hover {
+                background-color: #5619b8;
+                transform: translateY(-3px);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            }
+
+            @media (max-width: 768px) {
+                .courses-container {
+                    grid-template-columns: 1fr;
+                }
+                .filter-buttons {
+                    flex-direction: column;
+                    align-items: center;
+                }
+                .filter-btn {
+                    width: 80%;
+                }
+            }
+    </style>
+</head>
+<body>
+<!-- Header Section -->
+<header id="top">
+    <div class="container">
+        <nav class="navbar">
+            <a href="#" class="logo">Res<span>OnIT</span></a>
+            <div class="menu-toggle" id="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-trigger"><i class="fas fa-graduation-cap"></i> Courses</a>
+                    <div class="dropdown-content">
+                        <a href="#">
+                            <div class="course-title">Beginner <span class="course-price">₹20,000</span></div>
+                            <div class="course-hours"><i class="far fa-clock"></i> 70 Hours - Basic Java, HTML, CSS,
+                                Python
+                            </div>
+                        </a>
+                        <a href="#">
+                            <div class="course-title">Intermediate <span class="course-price">₹25,000</span></div>
+                            <div class="course-hours"><i class="far fa-clock"></i> 90 Hours - Java, Spring, Hibernate,
+                                Python
+                            </div>
+                        </a>
+                        <a href="#">
+                            <div class="course-title">Advanced <span class="course-price">₹30,000</span></div>
+                            <div class="course-hours"><i class="far fa-clock"></i> 130 Hours - Spring JPA, Security,
+                                React
+                            </div>
+                        </a>
+                        <a href="#">
+                            <div class="course-title">Expert <span class="course-price">₹40,000</span></div>
+                            <div class="course-hours"><i class="far fa-clock"></i> 180 Hours - Spring Cloud,
+                                Microservices
+                            </div>
+                        </a>
+                        <a href="#">
+                            <div class="course-title">Master <span class="course-price">₹50,000</span></div>
+                            <div class="course-hours"><i class="far fa-clock"></i> 270 Hours - Design Patterns, Python,
+                                Full Stack
+                            </div>
+                        </a>
+                        <a href="#">
+                            <div class="course-title">Big Data <span class="course-price">₹35,000</span></div>
+                            <div class="course-hours"><i class="far fa-clock"></i> 120 Hours - Apache Spark, Spring
+                            </div>
+                        </a>
+                    </div>
+                </li>
+                <li><a href="#"><i class="fas fa-info-circle"></i> About Us</a></li>
+                <li><a href="#"><i class="fas fa-building"></i> Facilities</a></li>
+                <li><a href="#"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="animate__animated animate__fadeInUp">Transform Your Career with <span>ResOnIT</span></h1>
+                <p class="animate__animated animate__fadeInUp animate__delay-1s">Embark on a journey of innovation and
+                    excellence with our cutting-edge technology training and internship programs tailored for future
+                    tech leaders.</p>
+                <a href="#" class="btn animate__animated animate__fadeInUp animate__delay-2s">Register Now <i
+                        class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="hero-image animate__animated animate__fadeInRight animate__delay-1s">
+                <img src="/api/placeholder/600/400" alt="ResOnIT Learning Environment">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats">
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number"><i class="fas fa-user-graduate"></i>5000+</div>
+                <div class="stat-text">Students Trained</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number"><i class="fas fa-briefcase"></i>200+</div>
+                <div class="stat-text">Industry Partners</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number"><i class="fas fa-laptop-code"></i>15+</div>
+                <div class="stat-text">Tech Courses</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number"><i class="fas fa-award"></i>98%</div>
+                <div class="stat-text">Placement Rate</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="course-section">
+    <div class="container">
+        <h2 class="course-title">Our Courses</h2>
+        <div class="filter-buttons">
+            <button class="filter-btn all-courses active">All Courses</button>
+            <button class="filter-btn beginner">Beginner</button>
+            <button class="filter-btn intermediate">Intermediate</button>
+            <button class="filter-btn advanced">Advanced</button>
+            <button class="filter-btn expert">Expert</button>
+            <button class="filter-btn master">Master</button>
+            <button class="filter-btn big-data">Big Data</button>
+            <button class="filter-btn res-code">Res Code</button>
+        </div>
+        <div class="courses-container">
+            <!-- Beginner Course -->
+            <div class="course-card beginner-course">
+                <span class="badge beginner-badge">BEGINNER</span>
+                <h3 class="course-name">Java Foundation</h3>
+                <ul class="course-details">
+                    <li>Basic Java, Data Structure</li>
+                    <li>Basic Python</li>
+                    <li>HTML, CSS, JavaScript, Angular/React</li>
+                    <li>Database - MySQL</li>
+                    <li>IDE - IntelliJ, VS CODE, Git, Git Bash</li>
+                </ul>
+                <p class="course-duration">70 HOURS</p>
+                <div class="live-project-tag">Live Project</div>
+                <p class="course-price">₹20,000/-</p>
+                <button class="enroll-btn">ENROLL NOW</button>
+            </div>
+
+            <!-- Intermediate Course -->
+            <div class="course-card intermediate-course">
+                <span class="badge intermediate-badge">INTERMEDIATE</span>
+                <h3 class="course-name">Java Developer</h3>
+                <ul class="course-details">
+                    <li>Basic Java, Data Structure, Spring</li>
+                    <li>Hibernate Framework, Spring Boot</li>
+                    <li>Basic Python, Numpy</li>
+                    <li>HTML, CSS, JavaScript, jQuery, Angular/React</li>
+                    <li>Database - MySQL</li>
+                    <li>IDE - IntelliJ, VS CODE, Git, Git Bash</li>
+                    <li>Build Tool - Maven</li>
+                </ul>
+                <p class="course-duration">90 HOURS</p>
+                <div class="live-project-tag">Live Project</div>
+                <p class="course-price">₹25,000/-</p>
+                <button class="enroll-btn">ENROLL NOW</button>
+            </div>
+
+            <!-- Advanced Course -->
+            <div class="course-card advanced-course">
+                <span class="badge advanced-badge">ADVANCED</span>
+                <h3 class="course-name">Full Stack Developer</h3>
+                <ul class="course-details">
+                    <li>Java Features, Data Structure, Spring</li>
+                    <li>Hibernate Framework, Spring Boot, Maven</li>
+                    <li>Spring Data JPA, Spring Security</li>
+                    <li>HTML, CSS, JavaScript, jQuery, Angular/React</li>
+                    <li>Database - MySQL</li>
+                    <li>IDE - IntelliJ, VS CODE, Git, Git Bash</li>
+                </ul>
+                <p class="course-duration">130 HOURS</p>
+                <div class="live-project-tag">Live Project</div>
+                <p class="course-price">₹30,000/-</p>
+                <button class="enroll-btn">ENROLL NOW</button>
+            </div>
+
+            <!-- Expert Course -->
+            <div class="course-card expert-course">
+                <span class="badge expert-badge">EXPERT</span>
+                <h3 class="course-name">Cloud Developer</h3>
+                <ul class="course-details">
+                    <li>Java Features, Data Structure, Spring</li>
+                    <li>Hibernate Framework, Spring Boot, Maven</li>
+                    <li>Spring Cloud, Microservices</li>
+                    <li>Design Patterns and Principles</li>
+                    <li>Basic Python, Numpy, Pandas</li>
+                    <li>Database - MySQL</li>
+                    <li>IDE - IntelliJ, VS CODE, Git, Git Bash</li>
+                </ul>
+                <p class="course-duration">270 HOURS</p>
+                <div class="live-project-tag">Live Project</div>
+                <p class="course-price">₹50,000/-</p>
+                <button class="enroll-btn">ENROLL NOW</button>
+            </div>
+
+            <!-- Master Course -->
+            <div class="course-card master-course">
+                <span class="badge master-badge">MASTER</span>
+                <h3 class="course-name">Advanced Architecture</h3>
+                <ul class="course-details">
+                    <li>Spring Cloud, Microservices</li>
+                    <li>Design Patterns and Principles</li>
+                    <li>Basic Python, Numpy, Pandas</li>
+                    <li>Database - MySQL</li>
+                    <li>IDE - IntelliJ, VS CODE, Git, Git Bash</li>
+                </ul>
+                <p class="course-duration">270 HOURS</p>
+                <div class="live-project-tag">Live Project</div>
+                <p class="course-price">₹50,000/-</p>
+                <button class="enroll-btn">ENROLL NOW</button>
+            </div>
+
+            <!-- Big Data Course -->
+            <div class="course-card big-data-course">
+                <span class="badge big-data-badge">BIG DATA</span>
+                <h3 class="course-name">Big Data Specialist</h3>
+                <ul class="course-details">
+                    <li>Basic Pro, Data Structure, Spring Boot, Maven</li>
+                    <li>Spring Data JPA, Spring Security, Spring Cloud</li>
+                    <li>Apache Spark</li>
+                    <li>Database - MySQL</li>
+                    <li>IDE - IntelliJ, Git, Git Bash</li>
+                </ul>
+                <p class="course-duration">120 HOURS</p>
+                <div class="live-project-tag">Live Project</div>
+                <p class="course-price">₹35,000/-</p>
+                <button class="enroll-btn">ENROLL NOW</button>
+            </div>
+
+            <!-- Res Code Course -->
+            <div class="course-card res-code-course">
+                <span class="badge res-code-badge">RES CODE</span>
+                <h3 class="course-name">Enterprise Developer</h3>
+                <ul class="course-details">
+                    <li>Java Pro, Data Structure, Spring</li>
+                    <li>Hibernate Framework, Spring Boot</li>
+                    <li>Spring Data JPA, Spring Security, Spring Cloud, Maven</li>
+                    <li>HTML, CSS, JavaScript, jQuery, ExpressJS, Angular/React</li>
+                    <li>Basic Python, Numpy, Pandas</li>
+                    <li>Database - MySQL</li>
+                    <li>IDE - IntelliJ, VS CODE, Git, Git Bash</li>
+                </ul>
+                <p class="course-duration">180 HOURS</p>
+                <div class="live-project-tag">Live Project</div>
+                <p class="course-price">₹40,000/-</p>
+                <button class="enroll-btn">ENROLL NOW</button>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Features Section -->
+<section class="features">
+    <div class="container">
+        <div class="section-title">
+            <div class="section-subtitle">WHAT WE OFFER</div>
+            <h2>Our Featured Facilities</h2>
+            <p class="section-description">Experience world-class learning environments and tools designed to maximize
+                your potential in technology</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-flask"></i></div>
+                <h3>State-of-the-art Research</h3>
+                <p>Access cutting-edge research opportunities and modern technology to enhance your learning experience
+                    with guidance from industry experts.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-book"></i></div>
+                <h3>Complete Library Collection</h3>
+                <p>Our comprehensive digital and physical library provides all the resources you need for your studies,
+                    projects and advanced research.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-laptop-code"></i></div>
+                <h3>Modern Tech Stack</h3>
+                <p>Learn with industry-relevant technologies and tools that prepare you for real-world challenges in
+                    today's competitive tech landscape.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-rocket"></i></div>
+                <h3>Live Project Internships</h3>
+                <p>Gain hands-on experience through internships working on live projects with real clients and build an
+                    impressive portfolio.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-users"></i></div>
+                <h3>Expert Mentorship</h3>
+                <p>Learn directly from industry professionals who bring years of practical experience and insights into
+                    the classroom.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-certificate"></i></div>
+                <h3>Industry Certifications</h3>
+                <p>Prepare for and earn globally recognized certifications that boost your resume and validate your
+                    expertise to employers.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section class="about">
+    <div class="container">
+        <div class="about-content">
+            <div class="about-text">
+                <h2>About Us</h2>
+                <p>We're a young & dynamic team of creative people, innovation & business experts. Our team is
+                    experienced, young, and dynamic under veteran leadership which specializes in understanding IT needs
+                    of an organization in all directions and versatile orientation.</p>
+                <p>We provide IT services to startups and small businesses looking for a partner for their design &
+                    development and communication requirements. Our curriculum is carefully designed to align with
+                    industry demands and future tech trends.</p>
+                <h3>Our Mission</h3>
+                <p>Our mission is to skill India with our IT Skills program where we teach a vivid range of programming
+                    languages and create tech professionals who are ready to make an impact in the global technology
+                    landscape!</p>
+            </div>
+            <div class="about-image">
+                <img src="/api/placeholder/600/400" alt="ResOnIT Team">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials">
+    <div class="container">
+        <div class="section-title">
+            <div class="section-subtitle">SUCCESS STORIES</div>
+            <h2>What Our Students Say</h2>
+            <p class="section-description">Hear from our graduates who have transformed their careers through our
+                training programs</p>
+        </div>
+        <div class="testimonial-cards">
+            <div class="testimonial-card">
+                <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
+                <p class="testimonial-text">The hands-on approach at ResOnIT helped me master Java and Spring framework.
+                    Within weeks of completing the course, I landed a job at a top tech company with a great
+                    package.</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">
+                        <img src="/api/placeholder/100/100" alt="Student Avatar">
+                    </div>
+                    <div>
+                        <div class="testimonial-name">Priya Sharma</div>
+                        <div class="testimonial-position">Java Developer at TechCorp</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
+                <p class="testimonial-text">The Big Data course completely changed my career trajectory. The instructors
+                    were incredibly knowledgeable and the live project experience gave me the confidence to tackle
+                    real-world problems.</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">
+                        <img src="/api/placeholder/100/100" alt="Student Avatar">
+                    </div>
+                    <div>
+                        <div class="testimonial-name">Rahul Patel</div>
+                        <div class="testimonial-position">Data Engineer at InnovateTech</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
+                <p class="testimonial-text">As a career changer, I was worried about breaking into tech. ResOnIT's
+                    beginner course was perfectly paced, and their placement support helped me secure my first tech role
+                    within a month of graduation.</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">
+                        <img src="/api/placeholder/100/100" alt="Student Avatar">
+                    </div>
+                    <div>
+                        <div class="testimonial-name">Aisha Khan</div>
+                        <div class="testimonial-position">Frontend Developer at WebSolutions</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta">
+    <div class="container">
+        <div class="cta-content">
+            <h2>Start Your Tech Journey Today</h2>
+            <p>Join thousands of students who have transformed their careers with our industry-leading training
+                programs.</p>
+            <a href="#" class="cta-btn">Enroll Now <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-wave"></div>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>About ResOnIT</h3>
+                <p style="color: rgba(255,255,255,0.7); margin-bottom: 20px;">We're dedicated to providing quality
+                    technology education and internship opportunities to build successful careers in IT.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> 109, Sector 16, Ghansoli, Navi Mumbai</li>
+                    <li><i class="fas fa-phone-alt"></i> +91-89-568-10-999</li>
+                    <li><i class="fas fa-envelope"></i> info@resonit.in</li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Our Courses</h3>
+                <ul>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Beginner</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Intermediate</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Advanced</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Expert</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Master</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Big Data</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Subscribe</h3>
+                <p style="color: rgba(255,255,255,0.7); margin-bottom: 15px;">Stay updated with our latest courses and
+                    events</p>
+                <div class="newsletter-form">
+                    <input type="email" class="newsletter-input" placeholder="Enter your email">
+                    <button class="newsletter-btn"><i class="fas fa-paper-plane"></i></button>
+                </div>
+                <div style="margin-top: 20px;">
+                    <h4 style="margin-bottom: 10px; font-size: 1.1rem;">Next Session</h4>
+                    <p style="color: rgba(255,255,255,0.7);"><i class="far fa-calendar-alt"></i> Saturday, March 15,
+                        2025</p>
+                    <p style="color: rgba(255,255,255,0.7);"><i class="far fa-clock"></i> 10:00-11:00 IST</p>
+                    <p style="color: rgba(255,255,255,0.7);"><i class="fas fa-laptop"></i> Online Mode</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 ResOnIT Infotech. All Rights Reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<a href="#top" class="back-to-top" id="back-to-top">
+    <i class="fas fa-chevron-up"></i>
+</a>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Mobile menu toggle
+      const menuToggle = document.getElementById('menu-toggle');
+      const navLinks = document.getElementById('nav-links');
+      const dropdownTriggers = document.querySelectorAll('.dropdown-trigger');
+      const backToTop = document.getElementById('back-to-top');
+
+      // Menu toggle functionality
+      menuToggle.addEventListener('click', function() {
+        menuToggle.classList.toggle('active');
+        navLinks.classList.toggle('active');
+      });
+
+      // Handle dropdowns on mobile
+      dropdownTriggers.forEach(trigger => {
+        trigger.addEventListener('click', function(e) {
+          if (window.innerWidth <= 768) {
+            e.preventDefault();
+            this.parentElement.classList.toggle('active');
+          }
+        });
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener('click', function(e) {
+        const isNavLinks = e.target.closest('.nav-links');
+        const isMenuToggle = e.target.closest('.menu-toggle');
+
+        if (!isNavLinks && !isMenuToggle && navLinks.classList.contains('active')) {
+          navLinks.classList.remove('active');
+          menuToggle.classList.remove('active');
+        }
+      });
+
+      // Responsive adjustments
+      window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+          navLinks.classList.remove('active');
+          menuToggle.classList.remove('active');
+          document.querySelectorAll('.dropdown').forEach(dropdown => {
+            dropdown.classList.remove('active');
+          });
+        }
+      });
+
+      // Back to top button functionality
+      window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 300) {
+          backToTop.classList.add('active');
+        } else {
+          backToTop.classList.remove('active');
+        }
+      });
+
+      // Smooth scroll for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          const href = this.getAttribute('href');
+
+          if (href !== '#') {
+            e.preventDefault();
+
+            const targetElement = document.querySelector(href);
+            if (targetElement) {
+              window.scrollTo({
+                top: targetElement.offsetTop - 80,
+                behavior: 'smooth'
+              });
+            }
+          }
+        });
+      });
+
+      // Scroll animation for elements
+      const animateOnScroll = function() {
+        const elements = document.querySelectorAll('.feature-card, .testimonial-card, .section-title, .about-content');
+
+        elements.forEach(element => {
+          const elementPosition = element.getBoundingClientRect().top;
+          const windowHeight = window.innerHeight;
+
+          if (elementPosition < windowHeight - 100) {
+            element.classList.add('fade-in');
+          }
+        });
+      };
+
+      // Run animation on load and scroll
+      window.addEventListener('load', animateOnScroll);
+      window.addEventListener('scroll', animateOnScroll);
+    });
+   document.addEventListener("DOMContentLoaded", function () {
+              const filterButtons = document.querySelectorAll(".filter-btn");
+              const courses = document.querySelectorAll(".course-card");
+
+              // Initialize with All Courses active
+              filterButtons[0].classList.add("active");
+
+              filterButtons.forEach(button => {
+                  button.addEventListener("click", function () {
+                      // Remove active class from all buttons
+                      filterButtons.forEach(btn => {
+                          btn.classList.remove("active");
+                      });
+
+                      // Add active class to clicked button
+                      this.classList.add("active");
+
+                      const category = button.classList[1];
+
+                      courses.forEach(course => {
+                          if (category === "all-courses" || course.classList.contains(`${category}-course`)) {
+                              course.style.display = "block";
+                          } else {
+                              course.style.display = "none";
+                          }
+                      });
+                  });
+              });
+          });
+</script>
+</body>
+</html>

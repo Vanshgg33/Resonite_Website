@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User & Course Fee Info</title>
+
+  <style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 18px;
+        text-align: left;
+    }
+    th, td {
+        padding: 10px;
+        border: 1px solid #ddd;
+    }
+    th {
+        background-color: #f4f4f4;
+    }
+    .form-container {
+        margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<h2>User & Course Fee Information</h2>
+
+<table id="feeTable">
+  <thead>
+  <tr>
+    <th>Fee-ID</th>
+    <th>User Name</th>
+    <th>Course Name</th>
+    <th>Total Fees</th>
+    <th>Date Paid</th>
+    <th>Fee Paid</th>
+    <th>Remaining Fees</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="cr : ${cr}">
+    <td th:text="${cr.feeId}"></td>
+    <td th:text="${cr.name}"></td>
+    <td th:text="${cr.courseName}"></td>
+    <td th:text="${cr.Total_Fees}"></td>
+    <td th:text="${cr.DatePaid}"></td>
+    <td th:text="${cr.FeePaid}"></td>
+    <td class="remaining-fees" th:text="${cr.RemainingFees}"></td>
+  </tr>
+  </tbody>
+</table>
+
+<div class="form-container">
+  <h3>Update Fee Details</h3>
+  <form action="/updateFee" method="post">
+
+    <div class="form-group">
+      <label for="totalFees">Total Fees:</label>
+      <input type="number" id="totalFees" name="Total_Fees" min="0" step="0.01" required th:value="${Total_Fees}" oninput="calculateRemaining()">
+    </div>
+
+    <div class="form-group">
+      <label for="datePaid">Date Paid:</label>
+      <input type="date" id="datePaid" name="datePaid" required>
+    </div>
+
+    <div class="form-group">
+      <label for="prevRemainingFees">Previous Remaining Fees:</label>
+      <input type="number" id="prevRemainingFees" name="prevRemainingFees" readonly>
+    </div>
+
+    <div class="form-group">
+      <label for="feePaid">Fee Paid:</label>
+      <input type="number" id="feePaid" name="feePaid" min="0" step="0.01" required oninput="calculateRemaining()">
+    </div>
+
+    <div class="form-group">
+      <label for="remainingFees">New Remaining Fees:</label>
+      <input type="number" id="remainingFees" name="remainingFees" min="0" step="0.01" readonly>
+    </div>
+
+    <button type="submit">Update Fee</button>
+  </form>
+</div>
+
+<script>
+  function calculateRemaining() {
+      const feePaid = parseFloat(document.getElementById('feePaid').value) || 0;
+      const remainingFeesInput = document.getElementById('remainingFees');
+      const prevRemainingFees = parseFloat(document.getElementById('prevRemainingFees').value) || 0;
+
+      let newRemainingFees = prevRemainingFees - feePaid;
+      remainingFeesInput.value = Math.max(0, newRemainingFees).toFixed(2);
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+      // Set today's date as default if datePaid is empty
+      const today = new Date().toISOString().split('T')[0];
+      const datePaidInput = document.getElementById('datePaid');
+      if (!datePaidInput.value) {
+          datePaidInput.value = today;
+      }
+
+      // Get last remaining fee from table and set it in the "Previous Remaining Fees" field
+      const remainingFeesCells = document.querySelectorAll('.remaining-fees');
+      if (remainingFeesCells.length > 0) {
+          const lastRemainingFees = remainingFeesCells[remainingFeesCells.length - 1].textContent.trim();
+          document.getElementById('prevRemainingFees').value = lastRemainingFees;
+          document.getElementById('remainingFees').value = lastRemainingFees;
+      }
+  });
+
+  document.getElementById('feePaid').addEventListener('input', calculateRemaining);
+</script>
+
+</body>
+</html>

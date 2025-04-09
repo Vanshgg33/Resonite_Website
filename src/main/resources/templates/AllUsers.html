@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All Users & Students</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --primary-light: #34495e;
+            --accent-color: #3498db;
+            --accent-hover: #2980b9;
+            --bg-color: #f5f7fa;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --text-light: #ffffff;
+            --border-color: #e1e5eb;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 8px rgba(0,0,0,0.08);
+            --radius: 8px;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 30px;
+            color: var(--text-color);
+            line-height: 1.5;
+        }
+
+        h2, h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-weight: 600;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .table-container {
+            background-color: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            padding: 20px;
+            margin-bottom: 40px;
+            overflow-x: auto;
+            transition: var(--transition);
+        }
+
+        .table-container:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            font-weight: 500;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        th:first-child {
+            border-top-left-radius: 6px;
+        }
+
+        th:last-child {
+            border-top-right-radius: 6px;
+        }
+
+        tbody tr:hover {
+            background-color: rgba(52, 152, 219, 0.05);
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 8px 16px;
+            background-color: var(--accent-color);
+            color: var(--text-light);
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .back-link:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .table-container {
+                width: 100%;
+                overflow-x: auto;
+            }
+
+            table {
+                width: 992px; /* Minimum width to ensure all columns are visible */
+            }
+        }
+    </style>
+</head>
+<body>
+
+<h2>All Users & Student Details</h2>
+
+<div class="table-container">
+    <table>
+        <thead>
+        <tr>
+            <th>User ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Age</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Pincode</th>
+            <th>Highest Education</th>
+            <th>Current Status</th>
+            <th>CourseIntrested</th>
+            <th>Course</th>
+            <th>Institution</th>
+            <th>Graduation Year</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="student : ${students}">
+            <td th:text="${student.user.userId} ?: 'N/A'"></td>
+            <td th:text="${student.user.name}"></td>
+            <td th:text="${student.user.email}"></td>
+            <td th:text="${student.user.phone}"></td>
+            <td th:text="${student.user.age}"></td>
+            <td th:text="${student.user.address}"></td>
+            <td th:text="${student.user.city}"></td>
+            <td th:text="${student.user.state}"></td>
+            <td th:text="${student.user.pincode}"></td>
+            <td th:text="${student.user.highestEdu}"></td>
+            <td th:text="${student.user.currentStatus}"></td>
+            <td th:text="${student.user.courseInterest}"></td>
+            <td th:text="${student.course}"></td>
+            <td th:text="${student.institution}"></td>
+            <td th:text="${student.graduationYear}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<h3>USERS Who are Employed</h3>
+
+<div class="table-container">
+    <table>
+        <thead>
+        <tr>
+            <th>User ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Age</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Pincode</th>
+            <th>Highest Education</th>
+            <th>Current Status</th>
+            <th>Course Intrested In</th>
+            <th>Company Name</th>
+            <th>Designation</th>
+            <th>Experience</th>
+            <th>Work Domain</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="employee : ${employees}">
+            <td th:text="${employee.user.UserId} ?: 'N/A'"></td>
+            <td th:text="${employee.user.name}"></td>
+            <td th:text="${employee.user.email}"></td>
+            <td th:text="${employee.user.phone}"></td>
+            <td th:text="${employee.user.age}"></td>
+            <td th:text="${employee.user.address}"></td>
+            <td th:text="${employee.user.city}"></td>
+            <td th:text="${employee.user.state}"></td>
+            <td th:text="${employee.user.pincode}"></td>
+            <td th:text="${employee.user.highestEdu}"></td>
+            <td th:text="${employee.user.currentStatus}"></td>
+            <td th:text="${employee.user.courseInterest}"></td>
+            <td th:text="${employee.companyName}"></td>
+            <td th:text="${employee.designation}"></td>
+            <td th:text="${employee.experience}"></td>
+            <td th:text="${employee.workDomain}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<a href="/admin" class="back-link">Back to Dashboard</a>
+
+</body>
+</html>

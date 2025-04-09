@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+  <meta charset="UTF-8">
+  <title>User Fee Details</title>
+  <style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 20px;
+        text-align: center;
+    }
+    h2 {
+        color: #333;
+    }
+    .form-container, .table-container {
+        margin-top: 20px;
+        background: #fff;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .form-group {
+        margin-bottom: 15px;
+        text-align: left;
+    }
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 500;
+    }
+    input[type="text"], input[type="number"], input[type="date"], input[type="email"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+    input:disabled {
+        background-color: #f1f1f1;
+        cursor: not-allowed;
+    }
+    button {
+        background-color: #28a745;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 10px;
+    }
+    button:hover {
+        background-color: #218838;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+    }
+    th, td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: 600;
+    }
+    tr:hover {
+        background-color: #f5f5f5;
+    }
+  </style>
+</head>
+<body>
+
+<h2>User Fee Details</h2>
+
+<div class="table-container">
+  <h3>User Information</h3>
+  <table>
+    <tr>
+      <th>User ID</th>
+      <th>Field</th>
+      <th>Value</th>
+    </tr>
+    <tr>
+      <td th:text="${id}"></td>
+      <td>Name</td>
+      <td th:text="${user.name}">John Doe</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>Email</td>
+      <td th:text="${user.email}">john.doe@example.com</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>Phone</td>
+      <td th:text="${user.phone}">+1 234 567 8900</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>Age</td>
+      <td th:text="${user.age}">25</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>Address</td>
+      <td th:text="${user.address}">123 Main St</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>City</td>
+      <td th:text="${user.city}">Anytown</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>State</td>
+      <td th:text="${user.state}">State</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>Pincode</td>
+      <td th:text="${user.pincode}">12345</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>Highest Education</td>
+      <td th:text="${user.highestEdu}">Bachelor's</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>Current Status</td>
+      <td th:text="${user.currentStatus}">Employed</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>Course Interest</td>
+      <td th:text="${user.courseInterest}">Web Development</td>
+    </tr>
+  </table>
+</div>
+
+<div class="form-container">
+  <h3>Update Fee Details</h3>
+  <form action="/forExsist" method="POST">
+    <div class="form-group">
+      <label for="userId">User ID:</label>
+      <input type="text" id="userId" name="userId" th:value="${id}" readonly>
+    </div>
+
+    <div class="form-group">
+      <label for="totalFees">Total Fees:</label>
+      <input type="number" id="totalFees" name="total_Fees" min="0" step="0.01" required oninput="calculateRemaining()">
+
+    </div>
+
+    <div class="form-group">
+      <label for="datePaid">Date Paid:</label>
+      <input type="date" id="datePaid" name="datePaid" required>
+    </div>
+
+    <div class="form-group">
+      <label for="feePaid">Fee Paid:</label>
+      <input type="number" id="feePaid" name="FeePaid" min="0" step="0.01" required oninput="calculateRemaining()">
+    </div>
+
+    <div class="form-group">
+      <label for="remainingFees">Remaining Fees:</label>
+      <input type="number" id="remainingFees"  name="remainingFees" min="0" step="0.01">
+    </div>
+
+    <input type ="submit">
+  </form>
+</div>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+      // Automatically set today's date in "Date Paid"
+      const datePaidInput = document.getElementById("datePaid");
+      if (datePaidInput) {
+          const today = new Date();
+          const formattedDate = today.toISOString().split('T')[0]; // Get YYYY-MM-DD format
+          datePaidInput.value = formattedDate;
+
+          // Prevent selecting past dates (optional)
+          datePaidInput.setAttribute("min", formattedDate);
+      }
+
+  });
+
+  // Function to calculate remaining fees
+  function calculateRemaining() {
+      const totalFeesInput = document.getElementById('totalFees');
+      const feePaidInput = document.getElementById('feePaid');
+      const remainingFeesInput = document.getElementById('remainingFees');
+
+      const totalFees = parseFloat(totalFeesInput.value) || 0;
+      const feePaid = parseFloat(feePaidInput.value) || 0;
+
+      remainingFeesInput.value = Math.max(0, totalFees - feePaid).toFixed(2);
+  }
+</script>
+
+</body>
+</html>
