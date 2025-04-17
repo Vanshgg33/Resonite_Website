@@ -16,7 +16,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
     <!-- Custom Styles -->
-    <link href="static/styleHome.css" rel=" stylesheet">
+    <link href="styleHome.css" rel="stylesheet">
 </head>
 
 <body class="light-mode">
@@ -24,7 +24,7 @@
 <nav class="navbar navbar-expand-lg">
     <div class="container">
         <a class="navbar-brand" href="#">
-            <span class="res">Res</span><span class="on">On</span><span class="it">IT</span> Tech
+            <span class="res">Res</span><span class="on">On</span><span class="it">IT</span>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,7 +56,7 @@
             <div class="col-lg-6">
                 <h1 class="hero-title">Transform Your Career with <span class="res-on-it">ResOnIT</span></h1>
                 <p class="hero-text">Embark on a journey of innovation and excellence with our cutting-edge technology training and internship programs tailored for future tech leaders.</p>
-                <a href="#" class="register-btn pulse">Register Now →</a>
+                <a href="Regis" class="register-btn pulse">Register Now →</a>
             </div>
             <div class="col-lg-6 text-center">
                 <img src="/api/placeholder/500/400" alt="ResOnIT Learning Environment" class="img-fluid">
@@ -114,6 +114,7 @@
             <button class="filter-btn" data-filter="master">Master</button>
             <button class="filter-btn" data-filter="big-data">Big Data</button>
             <button class="filter-btn" data-filter="res-code">Res Code</button>
+
         </div>
 
         <div class="row g-4 course-container">
@@ -121,7 +122,10 @@
             <div class="col-md-6 col-lg-4 course-item" data-category="beginner">
                 <div class="course-card">
                     <div class="course-content">
-                        <span class="course-level">BEGINNER</span>
+                        <div class="course-header">
+                            <span class="course-level">BEGINNER</span>
+                            <div class="course-duration">70 HOURS</div>
+                        </div>
                         <h3 class="course-title">Java Foundation</h3>
                         <ul class="course-features">
                             <li><i class="bi bi-check-circle-fill check-icon"></i> Basic Java, Data Structure</li>
@@ -129,12 +133,12 @@
                             <li><i class="bi bi-check-circle-fill check-icon"></i> HTML, CSS, JavaScript, Angular/React</li>
                             <li><i class="bi bi-check-circle-fill check-icon"></i> Database - MySQL</li>
                             <li><i class="bi bi-check-circle-fill check-icon"></i> IDE - IntelliJ, VS CODE, Git, Git Bash</li>
+                            <li><i class="bi bi-check-circle-fill check-icon"></i> Live Project</li>
                         </ul>
-                        <div class="course-duration">70 HOURS</div>
                         <div class="course-price">₹20,000/-</div>
                     </div>
                     <div class="course-actions">
-                        <span class="live-project-badge"><i class="bi bi-laptop"></i> Live Project</span>
+
                         <button class="enroll-btn">ENROLL NOW</button>
                     </div>
                 </div>
@@ -144,7 +148,10 @@
             <div class="col-md-6 col-lg-4 course-item" data-category="intermediate">
                 <div class="course-card">
                     <div class="course-content">
-                        <span class="course-level">INTERMEDIATE</span>
+                        <div class="course-header">
+                            <span class="course-level">INTERMEDIATE</span>
+                            <div class="course-duration">90 HOURS</div>
+                        </div>
                         <h3 class="course-title">Java Developer</h3>
                         <ul class="course-features">
                             <li><i class="bi bi-check-circle-fill check-icon"></i> Basic Java, Data Structure, Spring</li>
@@ -154,12 +161,12 @@
                             <li><i class="bi bi-check-circle-fill check-icon"></i> Database - MySQL</li>
                             <li><i class="bi bi-check-circle-fill check-icon"></i> IDE - IntelliJ, VS CODE, Git, Git Bash</li>
                             <li><i class="bi bi-check-circle-fill check-icon"></i> Build Tool - Maven</li>
+                            <li><i class="bi bi-check-circle-fill check-icon"></i> Live Project</li>
                         </ul>
-                        <div class="course-duration">90 HOURS</div>
                         <div class="course-price">₹25,000/-</div>
                     </div>
                     <div class="course-actions">
-                        <span class="live-project-badge"><i class="bi bi-laptop"></i> Live Project</span>
+
                         <button class="enroll-btn">ENROLL NOW</button>
                     </div>
                 </div>
@@ -169,7 +176,10 @@
             <div class="col-md-6 col-lg-4 course-item" data-category="advanced">
                 <div class="course-card">
                     <div class="course-content">
-                        <span class="course-level">ADVANCED</span>
+                        <div class="course-header">
+                            <span class="course-level">ADVANCED</span>
+                            <div class="course-duration">130 HOURS</div>
+                        </div>
                         <h3 class="course-title">Full Stack Developer</h3>
                         <ul class="course-features">
                             <li><i class="bi bi-check-circle-fill check-icon"></i> Java Features, Data Structure, Spring</li>
@@ -178,12 +188,12 @@
                             <li><i class="bi bi-check-circle-fill check-icon"></i> HTML, CSS, JavaScript, jQuery, Angular/React</li>
                             <li><i class="bi bi-check-circle-fill check-icon"></i> Database - MySQL</li>
                             <li><i class="bi bi-check-circle-fill check-icon"></i> IDE - IntelliJ, VS CODE, Git, Git Bash</li>
+                            <li><i class="bi bi-check-circle-fill check-icon"></i> Live Project</li>
                         </ul>
-                        <div class="course-duration">130 HOURS</div>
                         <div class="course-price">₹30,000/-</div>
                     </div>
                     <div class="course-actions">
-                        <span class="live-project-badge"><i class="bi bi-laptop"></i> Live Project</span>
+
                         <button class="enroll-btn">ENROLL NOW</button>
                     </div>
                 </div>
@@ -193,7 +203,10 @@
             <div class="col-md-6 col-lg-4 course-item" data-category="master">
                 <div class="course-card">
                     <div class="course-content">
-                        <span class="course-level">MASTER</span>
+                        <div class="course-header">
+                            <span class="course-level">MASTER</span>
+                            <div class="course-duration">120 HOURS</div>
+                        </div>
                         <h3 class="course-title">Master Developer</h3>
                         <ul class="course-features">
                             <li><i class="bi bi-check-circle-fill check-icon"></i> Spring Cloud, Microservices</li>
@@ -201,12 +214,12 @@
                             <li><i class="bi bi-check-circle-fill check-icon"></i> Advanced Java Features</li>
                             <li><i class="bi bi-check-circle-fill check-icon"></i> Git, CI/CD Pipeline</li>
                             <li><i class="bi bi-check-circle-fill check-icon"></i> Docker, Kubernetes Basics</li>
+                            <li><i class="bi bi-check-circle-fill check-icon"></i> Live Project</li>
                         </ul>
-                        <div class="course-duration">120 HOURS</div>
                         <div class="course-price">₹50,000/-</div>
                     </div>
                     <div class="course-actions">
-                        <span class="live-project-badge"><i class="bi bi-laptop"></i> Live Project</span>
+
                         <button class="enroll-btn">ENROLL NOW</button>
                     </div>
                 </div>
@@ -216,7 +229,10 @@
             <div class="col-md-6 col-lg-4 course-item" data-category="big-data">
                 <div class="course-card">
                     <div class="course-content">
-                        <span class="course-level">BIG DATA</span>
+                        <div class="course-header">
+                            <span class="course-level">BIG DATA</span>
+                            <div class="course-duration">270 HOURS</div>
+                        </div>
                         <h3 class="course-title">Big Data Specialist</h3>
                         <ul class="course-features">
                             <li><i class="bi bi-check-circle-fill check-icon"></i> Spring Cloud, Apache Spark</li>
@@ -224,12 +240,12 @@
                             <li><i class="bi bi-check-circle-fill check-icon"></i> Data Processing Techniques</li>
                             <li><i class="bi bi-check-circle-fill check-icon"></i> Spring JPA, NoSQL Databases</li>
                             <li><i class="bi bi-check-circle-fill check-icon"></i> Data Visualization</li>
+                            <li><i class="bi bi-check-circle-fill check-icon"></i> Live Project</li>
                         </ul>
-                        <div class="course-duration">270 HOURS</div>
                         <div class="course-price">₹35,000/-</div>
                     </div>
                     <div class="course-actions">
-                        <span class="live-project-badge"><i class="bi bi-laptop"></i> Live Project</span>
+
                         <button class="enroll-btn">ENROLL NOW</button>
                     </div>
                 </div>
@@ -239,7 +255,10 @@
             <div class="col-md-6 col-lg-4 course-item" data-category="res-code">
                 <div class="course-card">
                     <div class="course-content">
-                        <span class="course-level">RES CODE</span>
+                        <div class="course-header">
+                            <span class="course-level">RES CODE</span>
+                            <div class="course-duration">180 HOURS</div>
+                        </div>
                         <h3 class="course-title">Advanced Coding Bootcamp</h3>
                         <ul class="course-features">
                             <li><i class="bi bi-check-circle-fill check-icon"></i> Enterprise Application Development</li>
@@ -247,12 +266,12 @@
                             <li><i class="bi bi-check-circle-fill check-icon"></i> Modern Backend Architecture</li>
                             <li><i class="bi bi-check-circle-fill check-icon"></i> Cloud Deployment Strategies</li>
                             <li><i class="bi bi-check-circle-fill check-icon"></i> DevOps Integration</li>
+                            <li><i class="bi bi-check-circle-fill check-icon"></i> Live Project</li>
                         </ul>
-                        <div class="course-duration">180 HOURS</div>
                         <div class="course-price">₹45,000/-</div>
                     </div>
                     <div class="course-actions">
-                        <span class="live-project-badge"><i class="bi bi-laptop"></i> Live Project</span>
+
                         <button class="enroll-btn">ENROLL NOW</button>
                     </div>
                 </div>
@@ -261,7 +280,7 @@
     </div>
 </section>
 
-<!-- Call to Action Section -->
+        <!-- Call to Action Section -->
 <section class="cta-section">
     <div class="container">
         <div class="cta-content">

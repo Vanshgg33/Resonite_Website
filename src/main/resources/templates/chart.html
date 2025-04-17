@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Student Fee Analysis</title>
+</head>
+<body>
+<div style="max-width: 700px; margin: auto;">
+    <h2 style="text-align: center;">Student Fee Analysis</h2>
+    <canvas id="studentChart"></canvas>
+</div>
+
+<script th:inline="javascript">
+
+
+    var paidMoreThanHalf = /*[[${halfmore}]]*/;
+    var notPaidMoreThanHalf = /*[[${halfless}]]*/;
+   var studentsPaidFees = /*[[${paid}]]*/;
+
+console.log(paidMoreThanHalf);
+    console.log(notPaidMoreThanHalf);
+    console.log(studentsPaidFees);
+
+    // Render Bar Chart
+    const ctx = document.getElementById('studentChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Paid more than 50%', 'Paid less than 50%', 'Number of Students WHO PAID FEES'],
+            datasets: [{
+                label: 'Number of Students',
+                data: [paidMoreThanHalf, notPaidMoreThanHalf, studentsPaidFees],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(75, 192, 192, 0.5)'
+                ],
+                borderColor: [
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(75, 192, 192, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                title: {
+                    display: true,
+                    text: 'Student Fee Payment Analysis'
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>

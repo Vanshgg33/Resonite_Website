@@ -62,19 +62,19 @@ public class Functions {
 
 
     @PostMapping("forExsist")
-    public ModelAndView decide(@ModelAttribute Course_Fees_INFO courseFeesInfo){
-      courseFeesInfo.setCourseName(coursname);
-      courseFeesInfo.setName(name);
-      courseFeesInfo = feesRepo.save(courseFeesInfo);
-      ModelAndView mv = new ModelAndView();
+    public ModelAndView decide(@ModelAttribute Course_Fees_INFO courseFeesInfo) {
+        courseFeesInfo.setCourseName(coursname);
+        courseFeesInfo.setName(name);
+        courseFeesInfo = feesRepo.save(courseFeesInfo);
+        ModelAndView mv = new ModelAndView();
 
-     return new ModelAndView("redirect:/searchUser");
+        return new ModelAndView("redirect:/searchUser");
     }
 
 
     @PostMapping("/searchUser")
-    public ModelAndView searchUser(@RequestParam("userId") int id,@ModelAttribute Course_Fees_INFO courseFeesInfo) {
-         System.out.println("i am here");
+    public ModelAndView searchUser(@RequestParam("userId") int id, @ModelAttribute Course_Fees_INFO courseFeesInfo) {
+        System.out.println("i am here");
 
         User user = new User();
         user = userRepo.getById(id);
@@ -83,27 +83,19 @@ public class Functions {
         coursname = user.getCourseInterest();
         ModelAndView mv = new ModelAndView();
         mv.addObject("id", id);
-        if (feesRepo.existsByName(name) ) {
-          courseFeesInfo.setName(name);
-          courseFeesInfo.setCourseName(coursname);
+        if (feesRepo.existsByName(name)) {
+            courseFeesInfo.setName(name);
+            courseFeesInfo.setCourseName(coursname);
 
             System.out.println("Yes it exsist");
             List<Course_Fees_INFO> cr = feesRepo.getByName(name);
             for (Course_Fees_INFO item : cr) {
-                System.out.println("Fee ID: " + item.getFeeId());
-                System.out.println("User Name: " + item.getName());
-                System.out.println("Course Name: " + item.getCourseName());
-                System.out.println("Total Fees: " + item.getTotal_Fees());
-                System.out.println("Date Paid: " + item.getDatePaid());
-                System.out.println("Fee Paid: " + item.getFeePaid());
-                System.out.println("Remaining Fees: " + item.getRemainingFees());
-                System.out.println("----------------------");
 
             }
 
             mv.addObject("cr", cr);
-            mv.addObject("remaining",remaining);
-          //  courseFeesInfo= feesRepo.save(courseFeesInfo);
+            mv.addObject("remaining", remaining);
+
             mv.setViewName("UpdatePay2");
 
         } else {
@@ -111,7 +103,7 @@ public class Functions {
             courseFeesInfo.setCourseName(user.getCourseInterest());
             System.out.println(courseFeesInfo.getName());
             mv.addObject("totalfee", totalfee);
-//            Course_Fees_INFO courseFeesInfo1=feesRepo.save(courseFeesInfo);
+
             mv.addObject("user", user);
             mv.setViewName("UpdatePay1");
 
@@ -120,11 +112,10 @@ public class Functions {
     }
 
 
-
     @PostMapping("/updateFee")
     public ModelAndView feeup(@ModelAttribute Course_Fees_INFO courseFeesInfo) {
 
-//       courseFeesInfo.setUser(user);
+
         courseFeesInfo.setName(name);
         courseFeesInfo.setCourseName(coursname);
         feesRepo.save(courseFeesInfo);
@@ -135,6 +126,24 @@ public class Functions {
         System.out.println(courseFeesInfo.getName());
         mv.setViewName("updatedFee0");
 
+        return mv;
+    }
+
+
+    @GetMapping("/Analysis")
+    public ModelAndView chart(){
+        List<Course_Fees_INFO> fessinfo = feesRepo.findAll();
+        List<Course_Fees_INFO> halfpaid = feesRepo.paidHalf();
+        long UniquenameCount = fessinfo.stream().map(Course_Fees_INFO::getName).filter(Objects::nonNull).filter(name -> !name.isEmpty()).distinct().count();
+    long halfMore = halfpaid.stream().map(Course_Fees_INFO::getName).filter(Objects::nonNull).filter(name -> !name.isEmpty()).count();
+    long halfLess = UniquenameCount- halfMore;
+        ModelAndView mv  = new ModelAndView();
+        mv.addObject("halfmore",halfMore);
+        mv.addObject("halfless",halfLess);
+        mv.addObject("paid",UniquenameCount);
+        System.out.println(UniquenameCount);
+        System.out.println(halfMore);
+         mv.setViewName("/chart");
         return mv;
     }
 }

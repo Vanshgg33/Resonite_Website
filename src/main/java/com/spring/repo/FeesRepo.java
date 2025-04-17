@@ -16,4 +16,8 @@ public interface FeesRepo extends JpaRepository<Course_Fees_INFO, Integer> {
     boolean existsByName(String name);  // Fixed method name
 
     List<Course_Fees_INFO> getByName(String name);
+
+    @Query("SELECT c FROM Course_Fees_INFO c WHERE c.FeePaid > c.Total_Fees * 0.5")
+    List<Course_Fees_INFO> paidHalf();
+
 }
