@@ -69,35 +69,7 @@
   </form>
 </div>
 
-<script>
-  function calculateRemaining() {
-      const feePaid = parseFloat(document.getElementById('feePaid').value) || 0;
-      const remainingFeesInput = document.getElementById('remainingFees');
-      const prevRemainingFees = parseFloat(document.getElementById('prevRemainingFees').value) || 0;
-
-      let newRemainingFees = prevRemainingFees - feePaid;
-      remainingFeesInput.value = Math.max(0, newRemainingFees).toFixed(2);
-  }
-
-  document.addEventListener('DOMContentLoaded', function() {
-      // Set today's date as default if datePaid is empty
-      const today = new Date().toISOString().split('T')[0];
-      const datePaidInput = document.getElementById('datePaid');
-      if (!datePaidInput.value) {
-          datePaidInput.value = today;
-      }
-
-      // Get last remaining fee from table and set it in the "Previous Remaining Fees" field
-      const remainingFeesCells = document.querySelectorAll('.remaining-fees');
-      if (remainingFeesCells.length > 0) {
-          const lastRemainingFees = remainingFeesCells[remainingFeesCells.length - 1].textContent.trim();
-          document.getElementById('prevRemainingFees').value = lastRemainingFees;
-          document.getElementById('remainingFees').value = lastRemainingFees;
-      }
-  });
-
-  document.getElementById('feePaid').addEventListener('input', calculateRemaining);
-</script>
+<script src="/Admin.js"></script>
 
 </body>
 </html>

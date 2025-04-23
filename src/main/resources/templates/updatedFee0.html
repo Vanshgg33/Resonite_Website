@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User & Course Fee Info</title>
-    <link href="/styleAdmin.css" rel = "stylesheet">
+    <link href="/styleAdmin.css" rel="stylesheet">
 </head>
 <body>
 <div class="container">
     <h2>User & Course Fee Information</h2>
 
     <div class="table-container">
-        <table>
+        <table id="feeTable">
             <thead>
             <tr>
                 <th>Fee-ID</th>
@@ -52,13 +52,13 @@
             </div>
 
             <div class="form-group">
-                <label for="lastRemainingFees">Last Remaining Fees:</label>
-                <input type="number" id="lastRemainingFees" name="lastRemainingFees" readonly>
+                <label for="prevRemainingFees">Last Remaining Fees:</label>
+                <input type="number" id="prevRemainingFees" name="prevRemainingFees" readonly>
             </div>
 
             <div class="form-group">
                 <label for="feePaid">Fee Paid:</label>
-                <input type="number" id="feePaid" name="feePaid" min="0" step="0.01" required oninput="calculateRemaining()">
+                <input type="number" id="feePaid" name="feePaid" min="0" step="0.01" required>
             </div>
 
             <div class="form-group">
@@ -75,35 +75,8 @@
     </div>
 </div>
 
-<script>
-    function calculateRemaining() {
-        const feePaid = parseFloat(document.getElementById('feePaid').value) || 0;
-        const remainingFeesInput = document.getElementById('remainingFees');
-
-        const lastRemainingFees = parseFloat(document.getElementById('lastRemainingFees').value) || 0;
-        let remainingFees = lastRemainingFees - feePaid;
-
-        remainingFeesInput.value = Math.max(0, remainingFees).toFixed(2);
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-        // Set today's date as default if datePaid is empty
-        const today = new Date().toISOString().split('T')[0];
-        const datePaidInput = document.getElementById('datePaid');
-        if (!datePaidInput.value) {
-            datePaidInput.value = today;
-        }
-
-        // Get the last remaining fees value from the table
-        const remainingFeesCells = document.querySelectorAll('.remaining-fees');
-        if (remainingFeesCells.length > 0) {
-            const lastRemainingFees = remainingFeesCells[remainingFeesCells.length - 1].textContent.trim();
-            document.getElementById('lastRemainingFees').value = lastRemainingFees;
-        }
-    });
-
-    document.getElementById('feePaid').addEventListener('input', calculateRemaining);
-</script>
+<!-- Script link -->
+<script src="/Admin.js"></script>
 
 </body>
 </html>
